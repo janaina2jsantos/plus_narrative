@@ -1,0 +1,33 @@
+/* pagination */
+#pagination .navigation {
+    display: flex;
+    justify-content: center;
+}
+#pagination span.relative {
+    padding: 8px 12px;
+    border-radius: 0;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+#pagination span.relative a {
+    background-color: #0f0f0f!important;
+    color: #fff;
+    border-radius: 0;
+}
+#pagination span.relative a:hover {
+    background-color: #353535!important;
+}
+.pagination .pagination-link.is-active {
+    background-color: #3576c8;
+    font-weight: bold;
+}
+#dropdown {
+    margin: -10px 0 5px 15%;
+}
+#dropdown a {
+    padding: 8px;
+}
+#dropdown a:hover {
+    color: #909090;
+}
+
