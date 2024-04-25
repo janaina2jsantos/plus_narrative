@@ -10,13 +10,13 @@ use Illuminate\Support\Facades\Gate;
 
 class Dashboard extends Component
 {
-    public $usersCount, $income, $invoices, $search;
+    public $usersCount, $income, $invoices, $filter;
     private $users;
     protected $listeners = ['delete', 'searchUsers'];
 
     public function mount()
     {   
-        $this->users = User::orderBy('id', 'DESC')->paginate(5); 
+        $this->loadUsers();
         $this->usersCount = User::all()->count();
         $this->income = "2,873.88";
         $this->invoices = "75";
@@ -26,6 +26,8 @@ class Dashboard extends Component
 
     public function deleteConfirm($id)
     {
+        $this->mount();
+        
         if (Gate::allows('delete', Auth::user())) {
             $this->dispatchBrowserEvent('swal:confirm', [
                 'type' => 'warning',
@@ -59,11 +61,20 @@ class Dashboard extends Component
         }
     }
 
+    public function loadUsers()
+    {
+        $this->users = User::orderBy('id', 'DESC')->paginate(5); 
+    }
+
     public function searchUsers()
     {
-        $this->users = User::where('first_name', 'like', '%' . $this->search . '%')
-            ->orWhere('last_name', 'like', '%' . $this->search . '%')
-            ->paginate(5); 
+        if (!isset($this->filter) || empty($this->filter)) {
+            $this->loadUsers();
+            return;
+        }
+
+        $this->users = User::where('first_name', 'like', '%' . $this->filter . '%')
+            ->orWhere('last_name', 'like', '%' . $this->filter . '%')->paginate(5); 
     }
 
     public function render()

@@ -1,4 +1,7 @@
 /* pagination */
+body {
+    padding: 0!important;
+}
 #pagination .navigation {
     display: flex;
     justify-content: center;
@@ -30,4 +33,12 @@
 #dropdown a:hover {
     color: #909090;
 }
-
+.swal2-shown {
+    overflow: hidden!important;
+}
+.swal2-container {
+    padding-right: 0!important;
+}
+#userRole option {
+    background: #292929;
+}

@@ -64,7 +64,7 @@ class UserLogin extends Notification
         $slug = Str::slug($this->title . "-" . now()->format('Y-m-d'), "-");
 
         $data = [
-            'message' => 'New login',
+            'message' => 'Login alert',
             'action' => url('/'),
             'description' => 'Someone has logged into your account from a new browser/device. If it wasn\'t you, please change your password.',
             'login_information' => [],

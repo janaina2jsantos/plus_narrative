@@ -11,25 +11,26 @@
 
         <form method="POST" action="{{ route('register') }}">
             @csrf
-
             <!-- Name -->
             <div>
-                <x-label for="name" :value="__('Name')" />
+                <x-label for="firstName" :value="__('First Name')" />
+                <x-input id="firstName" class="block mt-1 w-full" type="text" name="first_name" :value="old('first_name')" required autofocus />
+            </div>
 
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
+            <div class="mt-4">
+                <x-label for="lastName" :value="__('Last Name')" />
+                <x-input id="lastName" class="block mt-1 w-full" type="text" name="last_name" :value="old('last_name')" required />
             </div>
 
             <!-- Email Address -->
             <div class="mt-4">
                 <x-label for="email" :value="__('Email')" />
-
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
             </div>
 
             <!-- Password -->
             <div class="mt-4">
                 <x-label for="password" :value="__('Password')" />
-
                 <x-input id="password" class="block mt-1 w-full"
                                 type="password"
                                 name="password"
@@ -39,7 +40,6 @@
             <!-- Confirm Password -->
             <div class="mt-4">
                 <x-label for="password_confirmation" :value="__('Confirm Password')" />
-
                 <x-input id="password_confirmation" class="block mt-1 w-full"
                                 type="password"
                                 name="password_confirmation" required />

@@ -49,7 +49,7 @@
             
             <div class="grid grid-cols-1 gap-4 mb-8">
                 <label class="font-bold text-white mb-[-20px]">Role</label>
-                <select wire:model.lazy="roleId" class="flex-1 py-2 bg-transparent border-t-0 border-x-0 border-b-2 border-gray-400 focus:border-blue-900 text-gray-200 placeholder-gray-400 outline-none"
+                <select wire:model.lazy="roleId" id="userRole" class="flex-1 py-2 bg-transparent border-t-0 border-x-0 border-b-2 border-gray-400 focus:border-blue-900 text-gray-200 placeholder-gray-400 outline-none"
                 @cannot('administer users')
                     disabled
                 @endcan>

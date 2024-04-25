@@ -6,9 +6,9 @@ use Livewire\Component;
 use App\Models\User;
 use App\Models\Role;
 use Illuminate\Support\Str;
-use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use App\Http\Requests\UserRequest;
 
 class Users extends Component
 {
@@ -16,28 +16,12 @@ class Users extends Component
 
     protected function rules()
     {
-        $rules = [
-            'firstName' => 'required|min:3',
-            'lastName' => 'required|min:3',
-            'roleId' => 'required',
-            'passwordConfirm' => 'same:password'
-        ];
+        return (new UserRequest())->rules($this->editUrl, $this->userId);
+    }
 
-        // checks if the url is for update a user
-        if ($this->editUrl) {
-            $rules['email'] = [
-                'required',
-                'email',
-                Rule::unique('users', 'email')->ignore($this->userId),
-            ];
-            $rules['password'] = 'nullable|min:8';
-        }
-        else {
-            $rules['email'] = 'required|email|unique:users,email';
-            $rules['password'] = 'required|min:8';
-        }
-
-        return $rules;
+    protected function messages()
+    {
+        return (new UserRequest())->messages();
     }
 
     public function mount($id=null)

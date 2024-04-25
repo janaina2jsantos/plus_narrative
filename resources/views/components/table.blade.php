@@ -7,7 +7,7 @@
     </div>
     <!-- filter -->
     <div class="w-full max-w-lg mb-8">
-        <input type="text" wire:model="search" class="w-2/3 flex-1 py-2 bg-[#0a0a0a] border-b-2 border-[#0a0a0a] focus:border-blue-900 text-gray-200 placeholder-gray-400 outline-none" placeholder="Search for users" wire:keydown="$emit('searchUsers')" />
+        <input type="text" wire:model="filter" class="w-2/3 flex-1 py-2 bg-[#0a0a0a] border-b-2 border-[#0a0a0a] focus:border-blue-900 text-gray-200 placeholder-gray-400 outline-none" placeholder="Search for users" wire:keyup="$emit('searchUsers')" />
         <button class="bg-[#0a0a0a] px-4 py-[10px]" wire:click="$emit('searchUsers')"><i class="fa fa-search"></i></button>
     </div>
 
@@ -20,12 +20,12 @@
                 <th class="text-left py-3 px-2">Member Since</th>
                 <th class="text-left py-3 px-2 rounded-r-lg">Actions</th>
             </thead>
-            @if($users->count())
+            @if($users && $users->count())
                 @foreach($users as $user)
                     <tr class="border-b border-gray-700">
                         <td class="py-3 px-2 font-bold">
                             <div class="inline-flex space-x-3 items-center">
-                                <span><img class="rounded-full w-8 h-8" src="{{ asset('assets/img/avatar.jpg') }}" alt=""></span>
+                                <span><img class="rounded-full w-8 h-8" src="{{ asset('assets/img/avatar.png') }}" alt=""></span>
                                 <span>{{ $user->first_name }} {{ $user->last_name }}</span>
                             </div>
                         </td>
@@ -67,4 +67,3 @@
         </div>
     @endif
 </div>
-

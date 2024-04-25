@@ -28,6 +28,7 @@ php artisan db:seed --class=UserSeeder
 
 ```
 - Choose one of the records in the users table in order to access the dashboard.
+- You can use Mailtrap/Mailhog to verify email notifications that must be sent every time a new login has been made from a new browser/device.
 - Enjoy the project!
 
 ## License
