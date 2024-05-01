@@ -101,7 +101,7 @@
             </a>
         </form>
     </div>
-    <p class="text-sm text-center text-gray-600">v2.0.0.3 | &copy; 2024 Janaina Santos</p>
+    <p class="text-sm text-center text-gray-600">v1.0.0 | &copy; 2024 Janaina Santos</p>
 </div>
 
 <script type="text/javascript">

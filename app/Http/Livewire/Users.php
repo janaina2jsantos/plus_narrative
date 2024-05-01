@@ -12,11 +12,11 @@ use App\Http\Requests\UserRequest;
 
 class Users extends Component
 {
-    public $userId, $roleId, $firstName, $lastName, $email, $password, $passwordConfirm, $title, $editUrl;
+    public $userId, $roleId, $firstName, $lastName, $email, $password, $passwordConfirm, $title, $editURL;
 
     protected function rules()
     {
-        return (new UserRequest())->rules($this->editUrl, $this->userId);
+        return (new UserRequest())->rules($this->editURL, $this->userId);
     }
 
     protected function messages()
@@ -33,7 +33,7 @@ class Users extends Component
             $this->lastName = $user->last_name;
             $this->email = $user->email;
             $this->roleId = $user->roles->pluck('id')[0];
-            $this->editUrl = $_SERVER['REQUEST_URI'];
+            $this->editURL = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : null;
         }
     }
 

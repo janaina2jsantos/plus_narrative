@@ -12,7 +12,7 @@ class UserRequest extends FormRequest
         return false;
     }
 
-    public function rules($URI, $userId)
+    public function rules($editURL, $userId)
     {
        $rules = [
             'firstName' => 'required|min:3',
@@ -21,8 +21,8 @@ class UserRequest extends FormRequest
             'passwordConfirm' => 'same:password'
         ];
 
-        // checks if the url is for update a user
-        if ($URI) {
+        // checks if the url is for update an user
+        if ($editURL) {
             $rules['email'] = [
                 'required',
                 'email',

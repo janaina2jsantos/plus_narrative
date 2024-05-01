@@ -15,7 +15,7 @@ class UserPolicy
         return $user->getRoleNames()->first() == 'admin';
     }
 
-    public function delete(User $user): bool
+    public function destroy(User $user): bool
     {
         return $user->getRoleNames()->first() == 'admin';
     }

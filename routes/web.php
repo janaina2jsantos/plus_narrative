@@ -18,32 +18,30 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// dashboard
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::group(['middleware' => 'auth'], function() {
+    // dashboard
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
 
-// profile
-Route::get("/profile", function() {
-    return view('profile');
-})->middleware('auth')->name('profile');
+    // profile
+    Route::get('/profile', function() {
+        return view('profile');
+    })->name('profile');
 
-// notification
-Route::get("/notification/{slug}", function() {
-    return view('notification');
-})->middleware('auth')->name('notification.show');
+    // notification
+    Route::get('/notification/{slug}', function() {
+        return view('notification');
+    })->name('notification.show');
 
-// users
-Route::prefix('users')->group(function () {
-    Route::get("/create", function() {
+    // users
+    Route::get('/users/create', function() {
         return view('users.create');
-    })->middleware(['auth', 'permission:administer users'])->name('users.create');
-
-    Route::get('/{id}/edit', function() {
-        return view('users.edit');
-    })->middleware(['auth', 'permission:administer users|view admin dashboard'])->name('users.edit');
-   
-    Route::get('/{id}/delete', ['middleware' => ['auth', 'permission:administer users'], 'uses' => [\App\Http\Livewire\Users::class, 'delete']])->name('users.delete');
+    })->middleware(['permission:administer users'])->name('users.create');
+    
+    Route::get('/users/{id}/edit', function($id) {
+        return view('users.edit', compact('id'));
+    })->middleware(['permission:administer users|view admin dashboard'])->name('users.edit');
 });
 
 require __DIR__.'/auth.php';

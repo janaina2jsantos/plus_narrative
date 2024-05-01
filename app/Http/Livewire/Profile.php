@@ -52,8 +52,7 @@ class Profile extends Component
         $this->mount($user);
         $this->reset(['password', 'passwordConfirm']);
     }
-
-
+    
     public function deleteConfirm($id)
     {
         $this->dispatchBrowserEvent('swal:confirm', [

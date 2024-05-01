@@ -14,49 +14,32 @@ class UserLogin extends Notification
 
     public $title, $info;
 
-    /**
-     * Create a new notification instance.
-     *
-     * @return void
-     */
     public function __construct($title, $info)
     {
         $this->title = $title;
         $this->info = $info;
     }
 
-    /**
-     * Get the notification's delivery channels.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
     public function via($notifiable)
     {
-        return ['database'];
+        return ['database', 'mail'];
     }
 
-    /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
-     */
-    // public function toMail($notifiable)
-    // {
-    //     $locationInfo = $this->info;
-    //     $mailMessage = (new MailMessage)
-    //                 ->line('New login.')
-    //                 ->action('Notification Action', url('/'))
-    //                 ->line('Someone has logged into your account from a new browser/device. If it wasn\'t you, please change your password.')
-    //                 ->line('Here is the login information: ');
+    public function toMail($notifiable)
+    {
+        $locationInfo = $this->info;
+        $mailMessage = (new MailMessage)
+                    ->line('New login.')
+                    ->action('Notification Action', url('/'))
+                    ->line('Someone has logged into your account from a new browser/device. If it wasn\'t you, please change your password.')
+                    ->line('Here is the login information: ');
 
-    //     foreach ($locationInfo as $key => $value) {
-    //         $mailMessage->line("$key: $value");
-    //     }
+        foreach ($locationInfo as $key => $value) {
+            $mailMessage->line("$key: $value");
+        }
 
-    //     return $mailMessage;
-    // }
+        return $mailMessage;
+    }
 
     public function toDatabase($notifiable)
     {
@@ -76,18 +59,5 @@ class UserLogin extends Notification
         }
 
         return $data;
-    }
-
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function toArray($notifiable)
-    {
-        return [
-            //
-        ];
     }
 }

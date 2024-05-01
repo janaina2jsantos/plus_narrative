@@ -12,7 +12,7 @@ class Dashboard extends Component
 {
     public $usersCount, $income, $invoices, $filter;
     private $users;
-    protected $listeners = ['delete', 'searchUsers'];
+    protected $listeners = ['delete' => 'destroy', 'searchUsers'];
 
     public function mount()
     {   
@@ -27,8 +27,8 @@ class Dashboard extends Component
     public function deleteConfirm($id)
     {
         $this->mount();
-        
-        if (Gate::allows('delete', Auth::user())) {
+
+        if (Gate::allows('destroy', Auth::user())) {
             $this->dispatchBrowserEvent('swal:confirm', [
                 'type' => 'warning',
                 'title' => 'Are you sure?',
@@ -41,12 +41,12 @@ class Dashboard extends Component
         }
     }
 
-    public function delete($id)
+    public function destroy($id)
     {  
         try {
             $user = User::findOrFail($id);
 
-            if (Gate::allows('delete', Auth::user())) {
+            if (Gate::allows('destroy', Auth::user())) {
                 $user->delete();
                 $this->dispatchBrowserEvent('scrollToTop');
                 $this->mount();

@@ -9,7 +9,7 @@
 
 ## About this project
 
-This is a full-stack project built with TALL stack solution. The project also includes resources like policies, REST API and Laravel Mail.
+This is a full-stack project built with TALL stack solution. The purpose of this project is to be able to create a user admin system, where you can create/edit a user and assign a role to a user. The system also sends an email when a user logs in with a new IP or device/browser. The project also includes resources like policies, REST API, TDD and Laravel Mail.
 
 ## Steps to run the project
 
